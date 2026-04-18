@@ -1,7 +1,7 @@
 {
   "name": "project-rabbit",
   "version": "1.0.0",
-  "description": "Project Rabbit - Project Marketplace with Razorpay Payment Integration",
+  "description": "Project Rabbit - Premium Academic Projects Marketplace by Rohan Kirdak",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
