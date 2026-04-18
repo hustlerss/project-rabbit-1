@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Rabbit — Premium Academic Projects Marketplace</title>
+<meta name="description" content="Buy ready-made academic projects with full source code, documentation, PPT & report. BCA, MCA, B.Tech, MBA projects at best prices. Instant download via Razorpay.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #fff; overflow-x: hidden; }
+
+  /* ── NAVBAR ── */
+  .navbar-custom {
+    background: rgba(10, 10, 26, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 14px 0;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .navbar-brand-text { color: #e94560; font-weight: 900; font-size: 22px; text-decoration: none; }
+  .nav-link-custom { color: rgba(255,255,255,0.75) !important; font-size: 14px; font-weight: 500; padding: 6px 14px !important; border-radius: 8px; transition: all 0.2s; }
+  .nav-link-custom:hover { color: #fff !important; background: rgba(255,255,255,0.07); }
+  .btn-nav-cart { background: #e94560; color: #fff !important; padding: 8px 20px !important; border-radius: 10px; font-weight: 700; }
+  .btn-nav-cart:hover { background: #c4294a; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a1a 0%, #12122a 40%, #0f1d3d 70%, #1a0a2e 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding-top: 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1400&q=60') center/cover;
+    opacity: 0.06;
+  }
+  .hero-orb-1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(233,69,96,0.25) 0%, transparent 70%); top: -100px; right: -100px; animation: float 8s ease-in-out infinite; }
+  .hero-orb-2 { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, transparent 70%); bottom: -50px; left: -80px; animation: float 10s ease-in-out infinite reverse; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
+
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 40px 20px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(233,69,96,0.15); border: 1px solid rgba(233,69,96,0.35); color: #e94560; padding: 8px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; margin-bottom: 30px; }
+  .hero h1 { font-size: clamp(36px, 6vw, 68px); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 24px; }
+  .hero h1 .gradient-text { background: linear-gradient(135deg, #e94560, #ff6b6b, #ffd93d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p { color: rgba(255,255,255,0.65); font-size: 18px; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary-hero { background: linear-gradient(135deg, #e94560, #c4294a); color: #fff; padding: 16px 38px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 16px; border: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 8px 30px rgba(233,69,96,0.4); }
+  .btn-primary-hero:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(233,69,96,0.5); color: #fff; }
+  .btn-outline-hero { background: transparent; color: #fff; padding: 16px 38px; border-radius: 14px; text-decoration: none; font-weight: 600; font-size: 16px; border: 2px solid rgba(255,255,255,0.25); transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-outline-hero:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+
+  /* Hero floating cards */
+  .hero-cards { display: flex; gap: 12px; justify-content: center; margin-top: 50px; flex-wrap: wrap; }
+  .hero-mini-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 18px; color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .hero-mini-card .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+  /* ── STATS ── */
+  .stats-strip {
+    background: linear-gradient(135deg, #e94560, #c4294a);
+    padding: 50px 0;
+  }
+  .stat-item { text-align: center; color: #fff; }
+  .stat-num { font-size: 44px; font-weight: 900; line-height: 1; }
+  .stat-lbl { font-size: 14px; opacity: 0.8; margin-top: 5px; }
+
+  /* ── SECTION COMMONS ── */
+  .section { padding: 90px 0; }
+  .section-tag { color: #e94560; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .section-heading { font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: #0a0a1a; line-height: 1.2; }
+  .section-sub { color: #6b7280; font-size: 16px; margin-top: 12px; line-height: 1.7; }
+
+  /* ── CATEGORIES ── */
+  .cat-card {
+    border-radius: 20px; overflow: hidden; position: relative;
+    text-decoration: none; display: block; color: inherit;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .cat-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+  .cat-img-wrap { height: 180px; overflow: hidden; position: relative; }
+  .cat-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .cat-card:hover .cat-img-wrap img { transform: scale(1.08); }
+  .cat-img-wrap .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.65)); }
+  .cat-badge { position: absolute; top: 12px; left: 12px; background: #e94560; color: #fff; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 20px; }
+  .cat-body { padding: 18px 20px 22px; }
+  .cat-icon-wrap { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 12px; }
+  .cat-title { font-weight: 800; font-size: 16px; color: #0a0a1a; margin-bottom: 6px; }
+  .cat-desc { color: #6b7280; font-size: 13px; line-height: 1.5; margin-bottom: 14px; }
+  .cat-price { font-weight: 800; font-size: 18px; color: #e94560; }
+  .cat-arrow { width: 32px; height: 32px; background: #f3f4f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .cat-card:hover .cat-arrow { background: #e94560; color: #fff; }
+
+  /* ── FEATURES ── */
+  .feature-card { background: #fff; border-radius: 20px; padding: 35px 30px; border: 1px solid rgba(0,0,0,0.07); transition: all 0.3s; box-shadow: 0 2px 15px rgba(0,0,0,0.04); }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); border-color: #e94560; }
+  .feature-icon { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
+  .feature-card h5 { font-weight: 800; font-size: 18px; color: #0a0a1a; margin-bottom: 10px; }
+  .feature-card p { color: #6b7280; font-size: 14px; line-height: 1.7; margin: 0; }
+
+  /* ── HOW IT WORKS ── */
+  .step-card { text-align: center; padding: 20px; }
+  .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, #e94560, #c4294a); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; margin: 0 auto 20px; box-shadow: 0 8px 20px rgba(233,69,96,0.35); }
+  .step-card h5 { font-weight: 800; color: #0a0a1a; margin-bottom: 10px; }
+  .step-card p { color: #6b7280; font-size: 14px; }
+  .step-connector { height: 2px; background: linear-gradient(to right, #e94560, transparent); margin-top: 30px; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonial-card { background: #fff; border-radius: 20px; padding: 30px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+  .testimonial-card .stars { color: #fbbf24; font-size: 18px; margin-bottom: 15px; }
+  .testimonial-card p { color: #374151; font-size: 15px; line-height: 1.7; font-style: italic; margin-bottom: 20px; }
+  .t-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0f1d3d 100%);
+    padding: 100px 0; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(233,69,96,0.2) 0%, transparent 70%); }
+  .cta-section h2 { font-size: clamp(30px, 5vw, 50px); font-weight: 900; color: #fff; margin-bottom: 20px; }
+  .cta-section p { color: rgba(255,255,255,0.65); font-size: 18px; margin-bottom: 40px; }
+
+  /* ── FOOTER ── */
+  .footer { background: #0a0a1a; color: rgba(255,255,255,0.7); padding: 70px 0 30px; }
+  .footer-brand { color: #e94560; font-weight: 900; font-size: 22px; }
+  .footer-desc { color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 12px; line-height: 1.7; }
+  .footer h6 { color: #fff; font-weight: 700; margin-bottom: 18px; font-size: 14px; letter-spacing: 0.5px; }
+  .footer a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; display: block; margin-bottom: 10px; transition: color 0.2s; }
+  .footer a:hover { color: #e94560; }
+  .footer-divider { border-color: rgba(255,255,255,0.1); margin: 40px 0 25px; }
+  .footer-bottom { color: rgba(255,255,255,0.4); font-size: 13px; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 5px; display: flex; max-width: 480px; margin: 30px auto 0; }
+  .search-wrap input { background: transparent; border: none; color: #fff; padding: 10px 16px; flex: 1; font-size: 14px; outline: none; }
+  .search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+  .search-wrap button { background: #e94560; border: none; color: #fff; padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+
+  /* Responsive */
+  @media(max-width:768px) { .hero { padding-top: 100px; } .hero h1 { font-size: 32px; } }
+</style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━ NAVBAR ━━━━━━━━━━ -->
+<nav class="navbar-custom">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <a href="/" class="navbar-brand-text">🐇 Project Rabbit</a>
+    <div class="d-flex flex-wrap gap-1 align-items-center">
+      <a href="/" class="nav-link-custom">Home</a>
+      <a href="/ready-project-details" class="nav-link-custom">Ready</a>
+      <a href="/mini-project-details" class="nav-link-custom">Mini</a>
+      <a href="/bundle-project-details" class="nav-link-custom">Bundle</a>
+      <a href="/customized-project-details" class="nav-link-custom">Custom</a>
+      <a href="/roadmaps" class="nav-link-custom">Roadmaps</a>
+      <a href="/contact" class="nav-link-custom">Contact</a>
+      <a href="/my-orders" class="nav-link-custom">My Orders</a>
+      <a href="/checkout" class="nav-link-custom btn-nav-cart">🛒 Cart</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ━━━━━━━━━━ HERO ━━━━━━━━━━ -->
+<section class="hero">
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      🎓 #1 Academic Projects Marketplace in India
+    </div>
+    <h1>
+      Get Your <span class="gradient-text">Dream Project</span><br>
+      Ready to Submit Today!
+    </h1>
+    <p>500+ premium projects across 14 categories — Web Dev, AI/ML, Mobile Apps, Blockchain, Cloud & more. Full source code + docs + PPT included.</p>
+    <div class="hero-btns">
+      <a href="/ready-project-details" class="btn-primary-hero"><i class="fas fa-rocket"></i> Browse Projects</a>
+      <a href="/customized-project-details" class="btn-outline-hero"><i class="fas fa-pencil-ruler"></i> Custom Project</a>
+    </div>
+
+    <div class="search-wrap">
+      <input type="text" placeholder="Search projects by technology, title..." id="heroSearch">
+      <button onclick="searchProject()">Search</button>
+    </div>
+
+    <div class="hero-cards mt-4">
+      <div class="hero-mini-card"><div class="dot"></div>⚡ Instant Download</div>
+      <div class="hero-mini-card"><div class="dot"></div>🔒 Secure Razorpay</div>
+      <div class="hero-mini-card"><div class="dot"></div>📄 Full Documentation</div>
+      <div class="hero-mini-card"><div class="dot"></div>🌟 4.9★ Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ STATS ━━━━━━━━━━ -->
+<section class="stats-strip">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">500+</div><div class="stat-lbl">Premium Projects</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">15K+</div><div class="stat-lbl">Students Helped</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">14+</div><div class="stat-lbl">Tech Categories</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">4.9⭐</div><div class="stat-lbl">Average Rating</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ ALL 14 CATEGORIES ━━━━━━━━━━ -->
+<section class="section" style="background:#f9fafb;">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-tag">Explore Categories</div>
+      <h2 class="section-heading">14 Project Categories to Choose From</h2>
+      <p class="section-sub">From basic mini-projects to advanced AI/Blockchain solutions — we have everything</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- 1. Ready Projects -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/ready-project-details" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Ready Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">🔥 Most Popular</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(233,69,96,0.1);">🚀</div>
+            <div class="cat-title">Ready Projects</div>
+            <div class="cat-desc">Complete, tested projects ready to submit. Includes source code, documentation & PPT.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹299</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 2. Mini Projects -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/mini-project-details" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&q=80" alt="Mini Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">💡 Beginner Friendly</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(59,130,246,0.1);">📦</div>
+            <div class="cat-title">Mini Projects</div>
+            <div class="cat-desc">Small, focused academic mini-projects perfect for BCA/B.Tech first & second year.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹199</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 3. Bundle Projects -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/bundle-project-details" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Bundle Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">🎁 Best Value</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(16,185,129,0.1);">🎁</div>
+            <div class="cat-title">Bundle Projects</div>
+            <div class="cat-desc">Complete bundle — source code + full documentation + PPT + project report included.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹599</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 4. Customized Projects -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/customized-project-details" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&q=80" alt="Customized Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">✏️ Made for You</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(245,158,11,0.1);">✏️</div>
+            <div class="cat-title">Customized Projects</div>
+            <div class="cat-desc">Tell us your requirements and our expert developers will build it exactly for you.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">Custom Quote</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 5. E-Commerce Projects -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/ecommerce-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80" alt="E-Commerce Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(239,68,68,0.1);">🛒</div>
+            <div class="cat-title">E-Commerce Projects</div>
+            <div class="cat-desc">Online shopping systems, cart management, payment gateway integrations & more.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹499</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 6. Web Development -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/ready-project-details" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="Web Development" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(99,102,241,0.1);">🌐</div>
+            <div class="cat-title">Web Development</div>
+            <div class="cat-desc">HTML/CSS/JS, PHP, Node.js, React, Angular & Django web projects with full backend.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹399</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 7. Full Stack -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/fullstack-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600&q=80" alt="Full Stack" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">⚡ Advanced</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(20,184,166,0.1);">⚙️</div>
+            <div class="cat-title">Full Stack Projects</div>
+            <div class="cat-desc">Complete MERN/MEAN stack apps with database, API, authentication & deployment.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹699</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 8. Mobile Apps -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/mobile-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="Mobile Apps" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(168,85,247,0.1);">📱</div>
+            <div class="cat-title">Mobile App Projects</div>
+            <div class="cat-desc">Android (Java/Kotlin), Flutter & React Native app projects with full source code.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹599</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 9. AI / ML -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/ai-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="AI ML Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">🤖 Trending</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(6,182,212,0.1);">🤖</div>
+            <div class="cat-title">AI / ML Projects</div>
+            <div class="cat-desc">Machine learning, deep learning, NLP, image recognition & prediction model projects.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹799</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 10. Data Science -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/ds-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Data Science" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(249,115,22,0.1);">📊</div>
+            <div class="cat-title">Data Science Projects</div>
+            <div class="cat-desc">Python data analysis, visualization, Pandas, Matplotlib, Power BI & Big Data projects.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹699</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 11. Gaming -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/gaming-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&q=80" alt="Gaming Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(139,92,246,0.1);">🎮</div>
+            <div class="cat-title">Gaming Projects</div>
+            <div class="cat-desc">Unity, Python Pygame & JavaScript game development projects with full source code.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹499</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 12. Cyber Security -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/cyber-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80" alt="Cyber Security" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(239,68,68,0.1);">🛡️</div>
+            <div class="cat-title">Cyber Security</div>
+            <div class="cat-desc">Network security, ethical hacking tools, encryption systems & vulnerability scanners.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹899</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 13. Blockchain -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/blockchain-project-list" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=600&q=80" alt="Blockchain Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+            <span class="cat-badge">🔗 Web3</span>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(245,158,11,0.1);">🔗</div>
+            <div class="cat-title">Blockchain Projects</div>
+            <div class="cat-desc">Smart contracts, DApps, NFT marketplaces, cryptocurrency & Solidity Ethereum projects.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹999</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 14. Cloud & DevOps -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/cloud-projects" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=600&q=80" alt="Cloud DevOps" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(14,165,233,0.1);">☁️</div>
+            <div class="cat-title">Cloud & DevOps</div>
+            <div class="cat-desc">AWS, Azure, Docker, Kubernetes, CI/CD pipeline & cloud architecture projects.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹799</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 15. E-Learning -->
+      <div class="col-md-4 col-sm-6 reveal">
+        <a href="/elearning-projects" class="cat-card">
+          <div class="cat-img-wrap">
+            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=600&q=80" alt="E-Learning Projects" loading="lazy">
+            <div class="cat-overlay"></div>
+          </div>
+          <div class="cat-body">
+            <div class="cat-icon-wrap" style="background:rgba(16,185,129,0.1);">🎓</div>
+            <div class="cat-title">E-Learning Projects</div>
+            <div class="cat-desc">Online learning management systems, quiz apps, course portals & student management apps.</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="cat-price">From ₹599</div>
+              <div class="cat-arrow"><i class="fas fa-arrow-right" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div><!-- /row -->
+  </div><!-- /container -->
+</section>
+
+<!-- ━━━━━━━━━━ HOW IT WORKS ━━━━━━━━━━ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-tag">Simple Process</div>
+      <h2 class="section-heading">How It Works?</h2>
+      <p class="section-sub">Get your project in 3 simple steps</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h5>Choose Your Project</h5>
+          <p>Browse 14+ categories. Filter by technology, price, or category. Find your perfect project.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h5>Secure Payment</h5>
+          <p>Pay securely through Razorpay — UPI, cards, net banking all accepted. 100% safe & encrypted.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h5>Instant Download</h5>
+          <p>Download your complete project immediately. Access source code, docs, PPT & report in one ZIP.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ FEATURES ━━━━━━━━━━ -->
+<section class="section" style="background:#f9fafb;">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-tag">Why Choose Us</div>
+      <h2 class="section-heading">Everything You Need to Succeed</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(233,69,96,0.1);">⚡</div>
+          <h5>Instant Download</h5>
+          <p>Get your project files immediately after payment — no waiting, no delays. Available 24/7.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(59,130,246,0.1);">📄</div>
+          <h5>Full Documentation</h5>
+          <p>Every project comes with source code, detailed documentation, PPT presentation & project report.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(16,185,129,0.1);">🔒</div>
+          <h5>100% Secure Payment</h5>
+          <p>Powered by Razorpay — India's most trusted payment gateway. UPI, cards, wallets accepted.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(245,158,11,0.1);">✅</div>
+          <h5>Tested & Working</h5>
+          <p>All projects are quality-tested before listing. 100% functional and ready to run on your machine.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(139,92,246,0.1);">🎯</div>
+          <h5>All Technologies</h5>
+          <p>Python, Java, PHP, Node.js, React, Flutter, Android, Unity, Solidity & 50+ more technologies.</p>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(6,182,212,0.1);">🏆</div>
+          <h5>Best Price Guaranteed</h5>
+          <p>Premium quality projects at student-friendly prices. Starting from just ₹199.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ TESTIMONIALS ━━━━━━━━━━ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-tag">Student Reviews</div>
+      <h2 class="section-heading">What Our Students Say</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Got my MCA final year project from Project Rabbit. Amazing quality! Everything was included — source code, docs, PPT. Submitted and got full marks!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" class="t-avatar" alt="Student">
+            <div><strong style="font-size:14px;">Rohan Mehta</strong><br><small class="text-muted">MCA Student, Mumbai</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"The AI/ML project I bought was exactly what I needed for my B.Tech project. The code was clean, well-commented and the documentation was perfect!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" class="t-avatar" alt="Student">
+            <div><strong style="font-size:14px;">Priya Sharma</strong><br><small class="text-muted">B.Tech Student, Pune</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Instant download after payment — took less than 2 minutes! The Flutter mobile app project was super clean. Highly recommend Project Rabbit to all students!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" class="t-avatar" alt="Student">
+            <div><strong style="font-size:14px;">Arjun Patel</strong><br><small class="text-muted">BCA Student, Ahmedabad</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ BANNER ━━━━━━━━━━ -->
+<section style="position:relative;overflow:hidden;">
+  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=70" style="width:100%;height:400px;object-fit:cover;" alt="Team coding">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,26,0.9),rgba(233,69,96,0.7));display:flex;align-items:center;justify-content:center;">
+    <div class="text-center text-white px-3">
+      <h2 style="font-size:clamp(26px,4vw,44px);font-weight:900;margin-bottom:15px;">Need a Custom Project Built For You?</h2>
+      <p style="font-size:18px;opacity:.85;margin-bottom:30px;">Our expert developers will create your project exactly as needed — any technology, any complexity.</p>
+      <a href="/customized-project-details" class="btn-primary-hero">✏️ Request Custom Project</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ CTA ━━━━━━━━━━ -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <div class="section-tag" style="color:#f87171;">Start Today</div>
+      <h2>Ready to Get Your Project?</h2>
+      <p>Join 15,000+ students who got their projects from Project Rabbit</p>
+      <div class="hero-btns">
+        <a href="/ready-project-details" class="btn-primary-hero"><i class="fas fa-rocket"></i> Browse All Projects</a>
+        <a href="/my-orders" class="btn-outline-hero"><i class="fas fa-box"></i> My Previous Orders</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━ FOOTER ━━━━━━━━━━ -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="footer-brand">🐇 Project Rabbit</div>
+        <p class="footer-desc">India's #1 academic project marketplace. 500+ projects across 14 tech categories.<br>Trusted by 15,000+ students.</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" style="color:#e94560;font-size:20px;"><i class="fab fa-instagram"></i></a>
+          <a href="#" style="color:#e94560;font-size:20px;"><i class="fab fa-youtube"></i></a>
+          <a href="#" style="color:#e94560;font-size:20px;"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" style="color:#e94560;font-size:20px;"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <h6>Projects</h6>
+        <a href="/ready-project-details">Ready Projects</a>
+        <a href="/mini-project-details">Mini Projects</a>
+        <a href="/bundle-project-details">Bundle Projects</a>
+        <a href="/customized-project-details">Custom Projects</a>
+        <a href="/elearning-projects">E-Learning</a>
+      </div>
+      <div class="col-md-2">
+        <h6>Categories</h6>
+        <a href="/ai-project-list">AI / ML</a>
+        <a href="/cloud-projects">Cloud & DevOps</a>
+        <a href="/blockchain-project-list">Blockchain</a>
+        <a href="/cyber-project-list">Cyber Security</a>
+        <a href="/mobile-project-list">Mobile Apps</a>
+      </div>
+      <div class="col-md-2">
+        <h6>Company</h6>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact</a>
+        <a href="/blogs">Blog</a>
+        <a href="/roadmaps">Roadmaps</a>
+        <a href="/admin/login">Admin</a>
+      </div>
+      <div class="col-md-2">
+        <h6>Support</h6>
+        <a href="/my-orders">My Orders</a>
+        <a href="/checkout">Checkout</a>
+        <a href="/cart">Cart</a>
+        <a href="/contact">Help</a>
+        <a href="/contact">Refund Policy</a>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <p class="footer-bottom mb-0">© 2024 Project Rabbit | All Rights Reserved | Powered by Razorpay 🔒</p>
+      <p class="footer-bottom mb-0">Made with ❤️ by Kanak Digifex</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+
+// Counter animation
+function animateCounter(el, target) {
+  let count = 0;
+  const inc = target / 60;
+  const timer = setInterval(() => {
+    count += inc;
+    if (count >= target) { el.textContent = target.toLocaleString() + '+'; clearInterval(timer); }
+    else el.textContent = Math.floor(count).toLocaleString() + '+';
+  }, 25);
+}
+
+// Search
+function searchProject() {
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = '/ready-project-details?search=' + encodeURIComponent(q);
+}
+document.getElementById('heroSearch').addEventListener('keypress', e => { if(e.key==='Enter') searchProject(); });
+</script>
+</body>
+</html>

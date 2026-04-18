@@ -1,0 +1,3 @@
+# This file ensures the uploads/ folder is tracked by Git.
+# Actual uploaded files are excluded via .gitignore (public/uploads/* rule).
+# On the server, project ZIP files and images will be stored here.

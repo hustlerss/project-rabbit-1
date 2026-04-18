@@ -1,0 +1,27 @@
+{
+  "name": "project-rabbit",
+  "version": "1.0.0",
+  "description": "Project Rabbit - Project Marketplace with Razorpay Payment Integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
+    "express-session": "^1.18.1",
+    "json": "^11.0.0",
+    "multer": "^1.4.5-lts.2",
+    "mysql": "^2.18.1",
+    "razorpay": "^2.9.2",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

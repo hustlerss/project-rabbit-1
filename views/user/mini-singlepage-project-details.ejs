@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Project Details | Project Rabbit</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="font-family:'Segoe UI',sans-serif;">
+<%- include('navbar.ejs') %>
+
+<div class="container py-5" style="max-width:900px;">
+<div class="row g-4">
+  <div class="col-md-5">
+    <img src="/uploads/<%=single_mini_project.ProjectImage%>" class="img-fluid rounded-3 shadow" style="width:100%;" onerror="this.src='https://placehold.co/400x300?text=Project+Rabbit'">
+  </div>
+  <div class="col-md-7">
+    <span class="badge bg-danger mb-2"><%=single_mini_project.ProjectCategory||single_mini_project.ProjectType||'Project'%></span>
+    <h2 class="fw-bold"><%=single_mini_project.ProjectTitle%></h2>
+    <div class="text-warning mb-2">⭐⭐⭐⭐⭐ (<%=single_mini_project.Rating||'5.0'%>)</div>
+    <p class="text-muted"><%=single_mini_project.ProjectDescription%></p>
+    <div style="font-size:32px;font-weight:900;color:#e94560;" class="mb-3">₹<%=single_mini_project.Price%></div>
+    <button class="btn btn-danger btn-lg w-100" onclick="addToCart('<%=single_mini_project.ProjectID%>','<%=single_mini_project.ProjectTitle%>',<%=single_mini_project.Price%>,'ready')">
+      🛒 Buy Now — ₹<%=single_mini_project.Price%>
+    </button>
+    <a href="/my-orders" class="btn btn-outline-secondary w-100 mt-2">📦 My Previous Orders</a>
+  </div>
+</div>
+</div>
+<script>
+function addToCart(id, title, price, type) {
+  let cart = JSON.parse(localStorage.getItem('projectRabbitCart') || '[]');
+  if(cart.find(i => i.id == id)) { alert('Already in cart!'); return; }
+  cart.push({ id, title, price, type });
+  localStorage.setItem('projectRabbitCart', JSON.stringify(cart));
+  if(confirm('Added to cart! Go to checkout?')) window.location.href='/checkout';
+}
+</script>
+<%- include('footer.ejs') %>
+</body>
+</html>
