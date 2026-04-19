@@ -2,6 +2,9 @@
   "name": "project-rabbit",
   "version": "1.0.0",
   "description": "Project Rabbit - Premium Academic Projects Marketplace by Rohan Kirdak",
+  "license": "ISC",
+  "author": "Rohan",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
