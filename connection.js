@@ -32,3 +32,4 @@ conn.on('error', function(err) {
 var exe = util.promisify(conn.query).bind(conn);
 
 module.exports = exe;
+console.log("DB NAME:", process.env.MYSQLDATABASE);
