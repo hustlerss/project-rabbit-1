@@ -48,9 +48,17 @@ router.get("/blog-details", async function (req, res) {
 });
 
 router.get("/ready-project-details", async function (req, res) {
+    var search = req.query.search || "";
     var sql = `SELECT * FROM ready_projects`;
-    var ready_projects = await exe(sql);
-    res.render("user/ready-project-details.ejs", { ready_projects });
+    var params = [];
+
+    if (search) {
+        sql += ` WHERE ProjectTitle LIKE ? OR ProjectDescription LIKE ? OR ProjectCategory LIKE ?`;
+        params = [`%${search}%`, `%${search}%`, `%${search}%`];
+    }
+
+    var ready_projects = await exe(sql, params);
+    res.render("user/ready-project-details.ejs", { ready_projects, search });
 });
 
 router.get("/single-project-details/:id", async function (req, res) {
@@ -357,5 +365,134 @@ router.get("/single-cloud-project/:id", async function (req, res) {
     res.render("user/single-cloud-project.ejs", { single_cloud_project: result[0] });
 });
 
+// =============================================
+// E-COMMERCE PROJECTS USER ROUTES
+// =============================================
+
+router.get("/ecommerce-project-list", async function (req, res) {
+    var sql = `SELECT * FROM ecommerce_projects`;
+    var ecommerce_projects = await exe(sql);
+    res.render("user/ecommerce-project-list.ejs", { ecommerce_projects });
+});
+
+router.get("/single-ecommerce-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM ecommerce_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// FULL STACK PROJECTS USER ROUTES
+// =============================================
+
+router.get("/fullstack-project-list", async function (req, res) {
+    var sql = `SELECT * FROM fullstack_projects`;
+    var fullstack_projects = await exe(sql);
+    res.render("user/fullstack-project-list.ejs", { fullstack_projects });
+});
+
+router.get("/single-fullstack-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM fullstack_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// MOBILE APP PROJECTS USER ROUTES
+// =============================================
+
+router.get("/mobile-project-list", async function (req, res) {
+    var sql = `SELECT * FROM mobile_projects`;
+    var mobile_projects = await exe(sql);
+    res.render("user/mobile-project-list.ejs", { mobile_projects });
+});
+
+router.get("/single-mobile-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM mobile_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// AI / ML PROJECTS USER ROUTES
+// =============================================
+
+router.get("/ai-project-list", async function (req, res) {
+    var sql = `SELECT * FROM ai_projects`;
+    var ai_projects = await exe(sql);
+    res.render("user/ai-project-list.ejs", { ai_projects });
+});
+
+router.get("/single-ai-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM ai_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// DATA SCIENCE PROJECTS USER ROUTES
+// =============================================
+
+router.get("/ds-project-list", async function (req, res) {
+    var sql = `SELECT * FROM ds_projects`;
+    var ds_projects = await exe(sql);
+    res.render("user/ds-project-list.ejs", { ds_projects });
+});
+
+router.get("/single-ds-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM ds_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// GAMING PROJECTS USER ROUTES
+// =============================================
+
+router.get("/gaming-project-list", async function (req, res) {
+    var sql = `SELECT * FROM gaming_projects`;
+    var gaming_projects = await exe(sql);
+    res.render("user/gaming-project-list.ejs", { gaming_projects });
+});
+
+router.get("/single-gaming-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM gaming_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// CYBER SECURITY PROJECTS USER ROUTES
+// =============================================
+
+router.get("/cyber-project-list", async function (req, res) {
+    var sql = `SELECT * FROM cyber_projects`;
+    var cyber_projects = await exe(sql);
+    res.render("user/cyber-project-list.ejs", { cyber_projects });
+});
+
+router.get("/single-cyber-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM cyber_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
+// =============================================
+// BLOCKCHAIN PROJECTS USER ROUTES
+// =============================================
+
+router.get("/blockchain-project-list", async function (req, res) {
+    var sql = `SELECT * FROM blockchain_projects`;
+    var blockchain_projects = await exe(sql);
+    res.render("user/blockchain-project-list.ejs", { blockchain_projects });
+});
+
+router.get("/single-blockchain-project/:id", async function (req, res) {
+    var sql = `SELECT * FROM blockchain_projects WHERE ProjectID = ?`;
+    var result = await exe(sql, [req.params.id]);
+    res.render("user/single-project-details.ejs", { single_ready_projects: result[0] });
+});
+
 // MUST be at the end
 module.exports = router;
+
