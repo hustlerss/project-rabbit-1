@@ -3,9 +3,24 @@ const express = require("express");
 var bodyparser = require("body-parser");
 var upload = require("express-fileupload");
 var session = require("express-session");
+var MySQLStore = require("express-mysql-session")(session);
+var mysql2 = require("mysql2/promise");
 var path = require("path");
 var user_route = require("./routes/user_routes");
 var admin_route = require("./routes/admin_routes");
+
+const sessionPool = mysql2.createPool({
+    host: process.env.MYSQLHOST,
+    port: process.env.MYSQLPORT || 3306,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+
+const sessionStore = new MySQLStore({ createDatabaseTable: true }, sessionPool);
 
 const app = express();
 
@@ -21,6 +36,7 @@ app.use(upload());
 app.use(express.static("public/"));
 app.use(session({
     secret: process.env.SESSION_SECRET || "kanak_digifex_project_mart_secret",
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 24 * 60 * 60 * 1000 } // 24 hours
