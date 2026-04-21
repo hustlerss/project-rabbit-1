@@ -9,7 +9,7 @@ var conn = mysql.createConnection({
     host: isProduction ? process.env.MYSQLHOST : process.env.DB_HOST || "localhost",
     user: isProduction ? process.env.MYSQLUSER : process.env.DB_USER || "root",
     password: isProduction ? process.env.MYSQLPASSWORD : process.env.DB_PASSWORD || "",
-    database: isProduction ? process.env.MYSQLDATABASE : process.env.DB_NAME || "kanak_digifex_project_mart",
+    database: isProduction ? process.env.MYSQL_DATABASE : process.env.DB_NAME || "kanak_digifex_project_mart",
     port: isProduction ? process.env.MYSQLPORT : 3306
 });
 
