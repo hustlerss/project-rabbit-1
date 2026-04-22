@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something went wrong! Please try again later.");
 });
 
-const PORT = process.env.PORT || 1000;
+const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 
 app.listen(PORT, HOST, () => {
