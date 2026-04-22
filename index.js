@@ -41,6 +41,10 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something went wrong! Please try again later.");
 });
 
+console.log("MYSQLHOST:", process.env.MYSQLHOST);
+console.log("MYSQLDB:", process.env.MYSQLDATABASE);
+console.log("PORT:", process.env.PORT);
+
 const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
 
