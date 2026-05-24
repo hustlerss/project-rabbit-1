@@ -9,16 +9,16 @@
 <body style="font-family:'Segoe UI',sans-serif;">
 <%- include('navbar.ejs') %>
 
-<div style="background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:60px 0;text-align:center;color:#fff;">
+<div style="background: radial-gradient(ellipse 100% 100% at 50% 0%, #15092a 0%, #050816 100%); padding: 60px 0; text-align: center; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08);">
   <h1 style="font-weight:900">Contact Us</h1>
   <p style="opacity:.7">We'd love to hear from you</p>
 </div>
 <div class="container py-5" style="max-width:600px;">
-  <div style="background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.08);padding:40px;">
+  <div style="background: rgba(11, 16, 32, 0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); padding: 40px; color: #fff;">
     <form id="contactForm">
-      <div class="mb-3"><label class="form-label fw-semibold">Your Name</label><input type="text" id="name" class="form-control" placeholder="Enter your name" required></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Email Address</label><input type="email" id="email" class="form-control" placeholder="Enter your email" required></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Message</label><textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Your Name</label><input type="text" id="name" class="form-control" placeholder="Enter your name" required></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Email Address</label><input type="email" id="email" class="form-control" placeholder="Enter your email" required></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Message</label><textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea></div>
       <button type="submit" class="btn btn-danger w-100" style="border-radius:10px;padding:12px;font-weight:700;">Send Message</button>
     </form>
     <div id="successMsg" style="display:none;" class="alert alert-success mt-3">✅ Message sent! We'll contact you soon.</div>

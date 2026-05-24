@@ -8,28 +8,75 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #f4f6f9; }
+        body { background: var(--bg-primary) !important; }
         .checkout-wrap { max-width: 900px; margin: 40px auto; padding: 0 15px; }
-        .checkout-card { background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.09); padding: 35px; }
-        .order-summary { background: linear-gradient(135deg, #1a1a2e, #0f3460); color: #fff; border-radius: 14px; padding: 25px; }
-        .order-summary h5 { color: #e94560; font-weight: 700; }
-        .form-control, .form-select { border-radius: 10px; padding: 12px 15px; border: 1.5px solid #e0e0e0; font-size: 14px; }
-        .form-control:focus { border-color: #e94560; box-shadow: 0 0 0 0.2rem rgba(233,69,96,0.15); }
-        .btn-pay { background: linear-gradient(135deg, #e94560, #c4294a); border: none; color: #fff; padding: 14px 30px; border-radius: 12px; font-size: 16px; font-weight: 700; width: 100%; transition: all 0.3s; letter-spacing: 0.5px; }
-        .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(233,69,96,0.4); color: #fff; }
-        .btn-pay:disabled { background: #aaa; transform: none; }
-        .secure-badge { text-align: center; color: #888; font-size: 13px; margin-top: 12px; }
-        .price-tag { font-size: 32px; font-weight: 800; color: #e94560; }
-        .rzp-logo { height: 22px; }
-        .step-badge { background: #e94560; color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
-        .section-title { font-weight: 700; color: #1a1a2e; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .checkout-card {
+            background: rgba(11, 16, 32, 0.6) !important;
+            backdrop-filter: var(--glass-blur) !important;
+            -webkit-backdrop-filter: var(--glass-blur) !important;
+            border: 1px solid var(--border-light) !important;
+            border-radius: 20px !important;
+            padding: 35px;
+            color: #fff !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35) !important;
+        }
+        .order-summary {
+            background: rgba(11, 16, 32, 0.6) !important;
+            backdrop-filter: var(--glass-blur) !important;
+            -webkit-backdrop-filter: var(--glass-blur) !important;
+            border: 1px solid var(--border-light) !important;
+            border-radius: 20px;
+            padding: 25px;
+            color: #fff !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+        }
+        .order-summary h5 { color: var(--accent-pink); font-weight: 700; }
+        .btn-pay {
+            background: var(--btn-gradient) !important;
+            border: none !important;
+            color: #fff !important;
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 18px rgba(255, 59, 112, 0.25) !important;
+        }
+        .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 59, 112, 0.45) !important; color: #fff; }
+        .btn-pay:disabled { background: #555 !important; transform: none; box-shadow: none !important; color: #888 !important; }
+        .secure-badge { text-align: center; color: var(--text-muted); font-size: 13px; margin-top: 12px; }
+        .price-tag { font-size: 32px; font-weight: 800; color: var(--accent-pink); }
+        .rzp-logo { height: 22px; filter: brightness(0) invert(1); }
+        .step-badge {
+            background: var(--btn-gradient);
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .section-title { font-weight: 700; color: #ffffff; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        hr { border-color: rgba(255, 255, 255, 0.08) !important; opacity: 1 !important; }
+        #cartItemsList .border {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            color: #fff !important;
+        }
+        #cartItemsList strong { color: #fff !important; }
+        .form-label { color: var(--text-secondary) !important; }
         #payment-success { display: none; }
         #payment-failed { display: none; }
     </style>
 </head>
 <body>
 <div class="checkout-wrap">
-    <h2 class="fw-bold mb-4" style="color:#1a1a2e;"><i class="fas fa-lock me-2" style="color:#e94560;"></i>Secure Checkout</h2>
+    <h2 class="fw-bold mb-4" style="color:#ffffff;"><i class="fas fa-lock me-2" style="color:var(--accent-pink);"></i>Secure Checkout</h2>
 
     <div class="row g-4">
         <!-- Left: Customer form -->

@@ -50,7 +50,7 @@ router.get("/logout", function (req, res) {
 // Protected Admin Dashboard
 router.get("/", isAdminLoggedIn, async function(req, res) {
     try {
-        const [ordersResult] = await exe("SELECT COUNT(*) as count, IFNULL(SUM(amount),0) as revenue FROM orders WHERE status='PAID'");
+        const [ordersResult] = await exe("SELECT COUNT(*) as count, COALESCE(SUM(amount),0) as revenue FROM orders WHERE status='PAID'");
         const [projectsResult] = await exe("SELECT (SELECT COUNT(*) FROM ready_projects) + (SELECT COUNT(*) FROM mini_projects) + (SELECT COUNT(*) FROM bundle_projects) as total");
         const [commentsResult] = await exe("SELECT COUNT(*) as count FROM comments");
         res.render("admin/index.ejs", {

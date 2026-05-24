@@ -1,57 +1,107 @@
 <style>
+  /* ─── PREMIUM SITE FOOTER ─── */
   .ph-user-footer {
-    background: #06060f;
-    color: rgba(255,255,255,.55);
-    padding: 52px 24px 28px;
-    border-top: 1px solid rgba(255,255,255,.06);
+    background: #05060f;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 80px 24px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-family: 'Inter', sans-serif;
+    position: relative;
+    z-index: 5;
   }
-  .ph-footer-inner { max-width: 1100px; margin: 0 auto; }
+  
+  .ph-footer-inner { max-width: 1200px; margin: 0 auto; }
+  
   .ph-footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 28px;
-    margin-bottom: 36px;
+    gap: 40px;
+    margin-bottom: 56px;
   }
-  @media(max-width:768px){ .ph-footer-grid{ grid-template-columns: 1fr 1fr; } }
+  @media(max-width:900px){ .ph-footer-grid{ grid-template-columns: 1fr 1fr; gap: 40px 24px; } }
   @media(max-width:480px){ .ph-footer-grid{ grid-template-columns: 1fr; } }
 
-  .ph-footer-logo { font-size:20px; font-weight:900; color:#fff; margin-bottom:10px; }
-  .ph-footer-logo span{ color:#e94560; }
-  .ph-footer-desc { font-size:13px; line-height:1.7; color:rgba(255,255,255,.42); margin-bottom:14px; }
-  .ph-footer-socials { display:flex; gap:10px; flex-wrap:wrap; }
-  .ph-footer-socials a {
-    width:34px; height:34px; border-radius:9px;
-    background:rgba(233,69,96,.12); border:1px solid rgba(233,69,96,.25);
-    display:flex; align-items:center; justify-content:center;
-    color:#e94560; font-size:14px; text-decoration:none; transition:all .2s;
+  /* Logo branding */
+  .ph-footer-logo {
+    font-size: 21px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: -0.4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .ph-footer-socials a:hover{ background:#e94560; color:#fff; border-color:transparent; }
+  .ph-footer-logo span {
+    background: linear-gradient(135deg, #ff3b70, #903bff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .ph-footer-desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 22px;
+    max-width: 320px;
+  }
 
+  /* Social Icons */
+  .ph-footer-socials { display: flex; gap: 12px; flex-wrap: wrap; }
+  .ph-footer-socials a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255, 255, 255, 0.7); font-size: 14px; text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .ph-footer-socials a:hover {
+    background: linear-gradient(135deg, #ff3b70 0%, #903bff 100%);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 20px rgba(255, 59, 112, 0.4);
+  }
+
+  /* Column Headers & Navs */
   .ph-footer-col h6 {
-    font-size:12px; font-weight:700; color:#fff;
-    text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
   }
   .ph-footer-col a {
-    display:block; color:rgba(255,255,255,.48); text-decoration:none;
-    font-size:13px; margin-bottom:9px; transition:color .2s;
+    display: block; color: rgba(255, 255, 255, 0.5); text-decoration: none;
+    font-size: 13.5px; margin-bottom: 12px; transition: all 0.2s ease;
   }
-  .ph-footer-col a:hover{ color:#e94560; }
+  .ph-footer-col a:hover {
+    color: #ff3b70;
+    transform: translateX(4px);
+  }
 
-  .ph-footer-hr{ border:none; border-top:1px solid rgba(255,255,255,.07); margin-bottom:20px; }
+  /* Footer bottom divider and copy */
+  .ph-footer-hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 32px; }
   .ph-footer-bottom {
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
-    font-size:12px; color:rgba(255,255,255,.28); text-align:center;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    font-size: 12.5px; color: rgba(255, 255, 255, 0.35); align-items: center;
   }
+  .ph-footer-bottom span a {
+    color: rgba(255, 255, 255, 0.45); text-decoration: none; transition: color 0.2s;
+  }
+  .ph-footer-bottom span a:hover { color: #ff3b70; }
 </style>
 
 <footer class="ph-user-footer">
   <div class="ph-footer-inner">
     <div class="ph-footer-grid">
-      <!-- Brand -->
+      <!-- Brand column -->
       <div>
-        <div class="ph-footer-logo">⚡ Project<span>Hub</span></div>
-        <p class="ph-footer-desc">India's #1 academic project marketplace. 500+ projects across 14 tech categories. Trusted by 15,000+ students nationwide.</p>
+        <div class="ph-footer-logo">🐇 Project<span>Hub</span></div>
+        <p class="ph-footer-desc">India's #1 academic project marketplace. 500+ premium projects across 14 tech categories. Handcrafted to impress.</p>
         <div class="ph-footer-socials">
           <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -81,7 +131,7 @@
       <div class="ph-footer-col">
         <h6>Support</h6>
         <a href="/about">About Us</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact">Contact Support</a>
         <a href="/my-orders">My Orders</a>
         <a href="/roadmaps">Roadmaps</a>
         <a href="/contact">Refund Policy</a>
@@ -90,7 +140,7 @@
     <hr class="ph-footer-hr">
     <div class="ph-footer-bottom">
       <span>© 2024 ProjectHub | All Rights Reserved | Powered by Razorpay 🔒</span>
-      <span>Made with ❤️ by Rohan Kirdak</span>
+      <span>Made with ❤️ by <a href="https://github.com/rohan-kirdak" target="_blank" rel="noopener">Rohan Kirdak</a></span>
     </div>
   </div>
 </footer>

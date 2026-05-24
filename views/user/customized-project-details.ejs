@@ -9,18 +9,18 @@
 <body style="font-family:'Segoe UI',sans-serif;">
 <%- include('navbar.ejs') %>
 
-<div style="background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:80px 0;text-align:center;color:#fff;">
+<div style="background: radial-gradient(ellipse 100% 100% at 50% 0%, #15092a 0%, #050816 100%); padding: 80px 0; text-align: center; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08);">
   <h1 style="font-weight:900">Get a Custom Project</h1>
   <p style="opacity:.7">Tell us your requirements and we'll build it for you!</p>
 </div>
 <div class="container py-5" style="max-width:650px;">
-  <div style="background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.08);padding:40px;">
+  <div style="background: rgba(11, 16, 32, 0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); padding: 40px; color: #fff;">
     <form method="POST" action="/submit_project">
-      <div class="mb-3"><label class="form-label fw-semibold">Full Name</label><input type="text" name="name" class="form-control" required placeholder="Your Name"></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Email</label><input type="email" name="email" class="form-control" required placeholder="your@email.com"></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Phone</label><input type="tel" name="phone" class="form-control" placeholder="9876543210"></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Technology</label><input type="text" name="technology" class="form-control" placeholder="e.g. Python, Java, PHP..."></div>
-      <div class="mb-3"><label class="form-label fw-semibold">Project Description</label><textarea name="description" class="form-control" rows="5" required placeholder="Describe your project requirements..."></textarea></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Full Name</label><input type="text" name="name" class="form-control" required placeholder="Your Name"></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Email</label><input type="email" name="email" class="form-control" required placeholder="your@email.com"></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Phone</label><input type="tel" name="phone" class="form-control" placeholder="9876543210"></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Technology</label><input type="text" name="technology" class="form-control" placeholder="e.g. Python, Java, PHP..."></div>
+      <div class="mb-3"><label class="form-label fw-semibold text-white">Project Description</label><textarea name="description" class="form-control" rows="5" required placeholder="Describe your project requirements..."></textarea></div>
       <button type="submit" class="btn btn-danger w-100" style="padding:14px;font-size:16px;font-weight:700;">📩 Submit Request</button>
     </form>
   </div>
